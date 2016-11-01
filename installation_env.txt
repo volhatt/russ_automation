@@ -1,0 +1,9 @@
+1. Virtual box
+2. Ubuntu 
+3. Guest Addition http://www.howtogeek.com/howto/2845/install-guest-additions-to-windows-and-linux-vms-in-virtualbox/
+4. 3. LiClipse in Ubuntu http://www.indjango.com/installing-liclipse-on-ubuntu/
+5. Shared folder - problem with permission http://www.howtogeek.com/187703/how-to-access-folders-on-your-host-machine-from-an-ubuntu-virtual-machine-in-virtualbox/
+sudo adduser [username] vboxsf
+To verify you are in the vboxsf group, you can type “id [username]” (without the quotes, and replacing “[username]” with your username) at the prompt and press Enter. All the groups of which the specified user is a member display.
+
+6. 
