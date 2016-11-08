@@ -96,6 +96,26 @@ the same with leading spaces and space of end of the line """
 
 
 #test how it works
+## take arguments from cmd
+### sys.argv = raw_input().split()
+### argv = sys.argv
+
+argv = ["rfaRunner.py", "--testrun=42"]
+if len(argv) != 2:
+    print("something wrong here ")
+    sys.exit('the arguments should be like \"--testrun=[0-10000]\"')
+
+file_name = argv[0]
+#file_name = getCleanString(argv[0])
+print("File Name Is : ", file_name)
+
+
+#trid = int(getCleanString(argv[0])((argv[1].split('='))[1]))
+trid = int((argv[1].split('='))[1])
+print("this is trid : ", trid)    
+
+
+
 localEnv = getLocalEnv('local.properties')
 ## check, delete later
 for i in localEnv:
@@ -107,11 +127,15 @@ if localEnv == -1:
 
 
 print("THIS IS LOCAL DIR ", localEnv['log_dir'])
-
+# take  local dir from properties file 
 log_dir = getCleanString(localEnv['log_dir'])
 
+if log_dir == '':
+    print"No value in log_dir"
+    sys.exit("No value in log_dir")
 
 print("LOG DIR !!! ", log_dir)
+
 direct_for_test = os.path.join(os.getcwd(), log_dir)
 print("direct_for_test " , direct_for_test)
 print(os.path.isdir(direct_for_test))
