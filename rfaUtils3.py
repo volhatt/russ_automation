@@ -41,7 +41,7 @@ def qaPrint(log, message):
     # writes message to a log file
     log.write(log_message + "\n")
 
-def getLog(log):
+def getLog(filename, log):
     """
     Creates 'logs' directory, if it doesn't exist,
     creates or opens a log file in 'logs' directory.
@@ -61,7 +61,7 @@ def getLog(log):
         if not os.path.isdir(log_dir):
             os.makedirs(log_dir)
         # open log file with prefix and timestamp (platform independent) in Append mode
-        log = open(os.path.join(log_dir, "rfaRunner_" + getCurTime("%Y%m%d_%H-%M") + ".log"), "a")
+        log = open(os.path.join(log_dir, filename + getCurTime("%Y%m%d_%H-%M") + ".log"), "a")
         return log
     except (OSError, IOError):
         # return -1 in case of exception
@@ -94,7 +94,7 @@ the same with leading spaces and space of end of the line """
 ## take arguments from cmd
 
 #really
-### argv = sys.argv
+##argv = sys.argv
 
 #for test
 argv = ["rfaRunner.py", "--testrun=42"]
@@ -102,13 +102,13 @@ if len(argv) != 2:
     print("something wrong here ")
     sys.exit('the arguments should be like \"--testrun=[0-10000]\"')
 
-file_name = argv[0]
-#file_name = getCleanString(argv[0])
+#file_name = argv[0]
+file_name = getCleanString(argv[0])
 print("File Name Is : ", file_name)
 
 
-#trid = int(getCleanString(argv[0])((argv[1].split('='))[1]))
-trid = int((argv[1].split('='))[1])
+trid = int(getCleanString((argv[1].split('='))[1]))
+#trid = int((argv[1].split('='))[1])
 print("this is trid : ", trid)    
 
 
@@ -135,7 +135,7 @@ if log_dir == '':
 #print("direct_for_test " , direct_for_test)
 #print(os.path.isdir(direct_for_test))
 
-log = getLog(log_dir)
+log = getLog(file_name, log_dir)
 if log == -1:
     sys.exit("Unable to create log file")
 
@@ -149,5 +149,17 @@ qaPrint(log, "Me like what me see")
 if not log.closed:
     log.close()
 
-
-
+######## LAST FUNCTION IS NOT READY YET
+def getTestCase(id):
+    filename = str(id)+'.txt'
+    print(filename)
+    f = open(filename, 'r')
+    #print(f.read())
+    for line in f:
+        line = getCleanString(line)
+        print(line.split('|'))
+        temp = line.split('|')
+        
+         
+    
+getTestCase(42)
