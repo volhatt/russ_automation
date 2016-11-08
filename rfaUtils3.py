@@ -49,28 +49,21 @@ def getLog(log):
     # assign a current working directory + '/logs' to log_dir variable (platform independent)
     ##logs = "logs"
     ##log_dir = os.path.join(os.getcwd(), "logs")
-    print(type(log))
 
     log_dir = os.path.join(os.getcwd(), log)
     
-    print('this is MY ', log_dir)
-    print(os.path.isdir(log_dir))
     
     # or --> script directory: log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
     # or --> user directory: log_dir = os.path.join(os.path.expanduser("~"), "logs")
 
     try:
-        print("ERROR1")
         # if logs directory(!) doesn't exist, create it
         if not os.path.isdir(log_dir):
-            print("ERROR2")
             os.makedirs(log_dir)
         # open log file with prefix and timestamp (platform independent) in Append mode
         log = open(os.path.join(log_dir, "rfaRunner_" + getCurTime("%Y%m%d_%H-%M") + ".log"), "a")
-        print("ERROR3", type(log))
         return log
     except (OSError, IOError):
-        print("ERROR4")
         # return -1 in case of exception
         return -1
     
@@ -95,11 +88,15 @@ the same with leading spaces and space of end of the line """
 
 
 
-#test how it works
+##############################################
+# rfaRunner.py
+
 ## take arguments from cmd
-### sys.argv = raw_input().split()
+
+#really
 ### argv = sys.argv
 
+#for test
 argv = ["rfaRunner.py", "--testrun=42"]
 if len(argv) != 2:
     print("something wrong here ")
@@ -113,7 +110,6 @@ print("File Name Is : ", file_name)
 #trid = int(getCleanString(argv[0])((argv[1].split('='))[1]))
 trid = int((argv[1].split('='))[1])
 print("this is trid : ", trid)    
-
 
 
 localEnv = getLocalEnv('local.properties')
@@ -131,21 +127,18 @@ print("THIS IS LOCAL DIR ", localEnv['log_dir'])
 log_dir = getCleanString(localEnv['log_dir'])
 
 if log_dir == '':
-    print"No value in log_dir"
+    print("No value in log_dir")
     sys.exit("No value in log_dir")
 
-print("LOG DIR !!! ", log_dir)
 
-direct_for_test = os.path.join(os.getcwd(), log_dir)
-print("direct_for_test " , direct_for_test)
-print(os.path.isdir(direct_for_test))
+#direct_for_test = os.path.join(os.getcwd(), log_dir)
+#print("direct_for_test " , direct_for_test)
+#print(os.path.isdir(direct_for_test))
 
 log = getLog(log_dir)
 if log == -1:
-    print("ERROR 5")
     sys.exit("Unable to create log file")
-print("LOT TYPPLE ???? ", type(log))
-    
+
 message = "It is working, right?"
 
 # call qaPrint to print a message with timestamp and write it to the log file
